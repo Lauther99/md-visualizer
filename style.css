@@ -1171,4 +1171,88 @@ html, body {
     padding: 40px 24px;
     margin: 16px;
   }
+
+  #downloadPdfBtn span {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Estilos de Contenedor para Exportación a PDF (html2pdf)
+   ========================================================================== */
+.pdf-export-container {
+  background-color: #ffffff !important;
+  color: #1f2328 !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  padding: 20px !important;
+  max-width: 100% !important;
+}
+
+.pdf-export-container .markdown-body {
+  color: #1f2328 !important;
+  background-color: transparent !important;
+  max-width: 100% !important;
+}
+
+.pdf-export-container h1,
+.pdf-export-container h2,
+.pdf-export-container h3,
+.pdf-export-container h4,
+.pdf-export-container h5,
+.pdf-export-container h6 {
+  color: #1f2328 !important;
+  page-break-after: avoid;
+}
+
+.pdf-export-container pre,
+.pdf-export-container .code-block-wrapper {
+  background-color: #f6f8fa !important;
+  border: 1px solid #d0d7de !important;
+  color: #1f2328 !important;
+  border-radius: 6px !important;
+  page-break-inside: avoid;
+}
+
+.pdf-export-container code {
+  color: #1f2328 !important;
+  font-family: 'JetBrains Mono', Consolas, monospace !important;
+}
+
+.pdf-export-container table {
+  page-break-inside: avoid;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.pdf-export-container th,
+.pdf-export-container td {
+  border: 1px solid #d0d7de !important;
+  color: #1f2328 !important;
+  padding: 8px 12px !important;
+}
+
+.pdf-export-container tr:nth-child(2n) {
+  background-color: #f6f8fa !important;
+}
+
+.pdf-export-container blockquote {
+  color: #57606a !important;
+  border-left: 4px solid #0969da !important;
+  background-color: rgba(9, 105, 218, 0.04) !important;
+}
+
+.pdf-export-container img {
+  max-width: 100%;
+  page-break-inside: avoid;
+}
+
+.spin-icon {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

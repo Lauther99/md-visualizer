@@ -106,6 +106,16 @@
         <span>Ejemplo</span>
       </button>
 
+      <button id="downloadPdfBtn" class="btn btn-secondary" title="Convertir Markdown a PDF y descargarlo">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="12" y1="18" x2="12" y2="12"></line>
+          <polyline points="9 15 12 18 15 15"></polyline>
+        </svg>
+        <span>Descargar PDF</span>
+      </button>
+
       <!-- Menú de exportación / opciones -->
       <div class="dropdown-wrapper">
         <button id="exportMenuBtn" class="btn btn-icon" title="Opciones y Exportar" aria-expanded="false">
@@ -116,6 +126,10 @@
           </svg>
         </button>
         <div id="exportDropdown" class="dropdown-menu">
+          <button id="actionDownloadPdf" class="dropdown-item">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><polyline points="9 15 12 18 15 15"></polyline></svg>
+            Descargar como PDF (.pdf)
+          </button>
           <button id="actionCopyMd" class="dropdown-item">
             <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
             Copiar Markdown
@@ -309,10 +323,11 @@
   <!-- Contenedor de notificaciones Toast -->
   <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
-  <!-- Scripts: Marked.js, DOMPurify y Highlight.js -->
+  <!-- Scripts: Marked.js, DOMPurify, Highlight.js y html2pdf -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   
   <!-- Lógica de la aplicación -->
   <script src="app.js"></script>

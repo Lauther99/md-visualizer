@@ -52,8 +52,10 @@
     modeEditorBtn: document.getElementById('modeEditorBtn'),
     backToTopBtn: document.getElementById('backToTopBtn'),
     toastContainer: document.getElementById('toastContainer'),
+    downloadPdfBtn: document.getElementById('downloadPdfBtn'),
     exportMenuBtn: document.getElementById('exportMenuBtn'),
     exportDropdown: document.getElementById('exportDropdown'),
+    actionDownloadPdf: document.getElementById('actionDownloadPdf'),
     actionCopyMd: document.getElementById('actionCopyMd'),
     actionCopyHtml: document.getElementById('actionCopyHtml'),
     actionDownloadMd: document.getElementById('actionDownloadMd'),
@@ -799,7 +801,102 @@ print(fibonacci(10))
     showToast(`Descargando ${link.download}`, 'info');
   });
 
-  // Imprimir / Exportar a PDF
+  // --- Conversión y Descarga Directa a PDF ---
+  async function downloadMarkdownAsPdf() {
+    const activeDoc = getActiveFile();
+    if (!activeDoc || !activeDoc.content || !activeDoc.content.trim()) {
+      showToast('Abre o escribe un documento antes de descargar en PDF', 'error');
+      return;
+    }
+
+    const btn = DOM.downloadPdfBtn;
+    const originalBtnHtml = btn ? btn.innerHTML : '';
+    if (btn) {
+      btn.disabled = true;
+      btn.style.opacity = '0.7';
+      btn.innerHTML = `
+        <svg class="spin-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+        </svg>
+        <span>Generando...</span>
+      `;
+    }
+
+    showToast('Generando archivo PDF...', 'info');
+
+    try {
+      // Crear contenedor temporal para renderizado limpio
+      const exportWrapper = document.createElement('div');
+      exportWrapper.className = 'pdf-export-container';
+
+      // Clonar el contenido HTML renderizado
+      const clone = DOM.markdownOutput.cloneNode(true);
+
+      // Eliminar elementos no deseados en la exportación (como botones de copia)
+      clone.querySelectorAll('.code-copy-btn').forEach(el => el.remove());
+      exportWrapper.appendChild(clone);
+
+      const baseName = (activeDoc.name || 'documento')
+        .replace(/\.(md|markdown|txt)$/i, '');
+      const fileName = `${baseName}.pdf`;
+
+      if (typeof html2pdf !== 'undefined') {
+        const opt = {
+          margin: [12, 12, 12, 12],
+          filename: fileName,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            letterRendering: true,
+            logging: false,
+            backgroundColor: '#ffffff'
+          },
+          jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait'
+          },
+          pagebreak: {
+            mode: ['avoid-all', 'css', 'legacy']
+          }
+        };
+
+        await html2pdf().set(opt).from(exportWrapper).save();
+        showToast(`PDF descargado con éxito: ${fileName}`, 'success');
+      } else {
+        // En caso de que html2pdf no esté cargado, fallback a print
+        window.print();
+        showToast('Abriendo ventana de impresión para guardar PDF', 'info');
+      }
+    } catch (err) {
+      console.error('Error al generar PDF:', err);
+      showToast('Error al generar PDF directo. Abriendo diálogo de impresión...', 'error');
+      window.print();
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = '';
+        btn.innerHTML = originalBtnHtml;
+      }
+    }
+  }
+
+  // Evento botón Descargar PDF en barra superior
+  if (DOM.downloadPdfBtn) {
+    DOM.downloadPdfBtn.addEventListener('click', downloadMarkdownAsPdf);
+  }
+
+  // Evento opción Descargar PDF en menú desplegable
+  if (DOM.actionDownloadPdf) {
+    DOM.actionDownloadPdf.addEventListener('click', () => {
+      DOM.exportDropdown.classList.remove('show');
+      downloadMarkdownAsPdf();
+    });
+  }
+
+  // Imprimir / Guardar en PDF (Diálogo nativo)
   DOM.actionPrintPdf.addEventListener('click', () => {
     DOM.exportDropdown.classList.remove('show');
     const activeDoc = getActiveFile();
