@@ -1145,6 +1145,37 @@ html, body {
   .markdown-body table {
     page-break-inside: avoid;
   }
+
+  .markdown-body blockquote {
+    background: #f6f8fa !important;
+    border-left: 4px solid #0969da !important;
+    color: #1f2328 !important;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body blockquote p,
+  .markdown-body blockquote span,
+  .markdown-body blockquote li {
+    color: #1f2328 !important;
+  }
+
+  .markdown-body blockquote strong,
+  .markdown-body blockquote b {
+    color: #0d1117 !important;
+    font-weight: 700 !important;
+  }
+
+  .markdown-body blockquote em,
+  .markdown-body blockquote i {
+    color: #24292f !important;
+  }
+
+  .markdown-body code:not(pre code) {
+    background-color: #eff1f3 !important;
+    color: #0550ae !important;
+    border: 1px solid #d0d7de !important;
+    font-weight: 600 !important;
+  }
 }
 
 /* ==========================================================================
@@ -1206,6 +1237,63 @@ html, body {
   page-break-after: avoid;
 }
 
+/* Citas y Bloques de Mensaje (> Citas / Callouts) */
+.pdf-export-container blockquote {
+  color: #1f2328 !important;
+  border-left: 4px solid #0969da !important;
+  background-color: #f6f8fa !important;
+  padding: 10px 16px !important;
+  margin: 0 0 16px 0 !important;
+  border-radius: 0 6px 6px 0 !important;
+  page-break-inside: avoid;
+}
+
+.pdf-export-container blockquote p,
+.pdf-export-container blockquote span,
+.pdf-export-container blockquote li {
+  color: #1f2328 !important;
+}
+
+.pdf-export-container blockquote strong,
+.pdf-export-container blockquote b,
+.pdf-export-container strong {
+  color: #0d1117 !important;
+  font-weight: 700 !important;
+}
+
+.pdf-export-container blockquote em,
+.pdf-export-container blockquote i {
+  color: #24292f !important;
+}
+
+/* Código en línea (inline code) con alto contraste */
+.pdf-export-container code:not(pre code) {
+  color: #0550ae !important;
+  background-color: #eff1f3 !important;
+  border: 1px solid #d0d7de !important;
+  border-radius: 4px !important;
+  padding: 0.15em 0.4em !important;
+  font-weight: 600 !important;
+  font-family: 'JetBrains Mono', Consolas, monospace !important;
+}
+
+/* Resaltado de texto / Marcas */
+.pdf-export-container mark {
+  background-color: #fff8c5 !important;
+  color: #1f2328 !important;
+  padding: 2px 5px !important;
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+}
+
+/* Enlaces */
+.pdf-export-container a {
+  color: #0969da !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+}
+
+/* Bloques de Código */
 .pdf-export-container pre,
 .pdf-export-container .code-block-wrapper {
   background-color: #f6f8fa !important;
@@ -1215,9 +1303,54 @@ html, body {
   page-break-inside: avoid;
 }
 
-.pdf-export-container code {
+.pdf-export-container .code-block-header {
+  background-color: #eaeef2 !important;
+  color: #57606a !important;
+  border-bottom: 1px solid #d0d7de !important;
+  font-weight: 600 !important;
+}
+
+.pdf-export-container pre code {
   color: #1f2328 !important;
   font-family: 'JetBrains Mono', Consolas, monospace !important;
+}
+
+/* Tokens de resaltado de sintaxis con alto contraste para fondo blanco */
+.pdf-export-container .hljs-keyword,
+.pdf-export-container .hljs-selector-tag,
+.pdf-export-container .hljs-subst {
+  color: #cf222e !important;
+  font-weight: 600 !important;
+}
+
+.pdf-export-container .hljs-string,
+.pdf-export-container .hljs-title,
+.pdf-export-container .hljs-section,
+.pdf-export-container .hljs-attribute,
+.pdf-export-container .hljs-literal {
+  color: #0a3069 !important;
+}
+
+.pdf-export-container .hljs-comment,
+.pdf-export-container .hljs-quote {
+  color: #57606a !important;
+  font-style: italic !important;
+}
+
+.pdf-export-container .hljs-number,
+.pdf-export-container .hljs-regexp,
+.pdf-export-container .hljs-link {
+  color: #0550ae !important;
+}
+
+.pdf-export-container .hljs-variable,
+.pdf-export-container .hljs-template-variable {
+  color: #953800 !important;
+}
+
+.pdf-export-container .hljs-function,
+.pdf-export-container .hljs-title.function_ {
+  color: #8250df !important;
 }
 
 .pdf-export-container table {
@@ -1235,12 +1368,6 @@ html, body {
 
 .pdf-export-container tr:nth-child(2n) {
   background-color: #f6f8fa !important;
-}
-
-.pdf-export-container blockquote {
-  color: #57606a !important;
-  border-left: 4px solid #0969da !important;
-  background-color: rgba(9, 105, 218, 0.04) !important;
 }
 
 .pdf-export-container img {
